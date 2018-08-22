@@ -1,0 +1,358 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Este microservicio es para la gestion de la tabla negocio",
+    "version": "1.0.0",
+    "title": "Microservicio negocio",
+    "contact": {
+      "email": "alexis.correa@accenture.com"
+    }
+  },
+  "host": "localhost:8090",
+  "basePath": "/negocios",
+  "paths": {
+    "/registrar": {
+      "post": {
+        "tags": [
+          "negocio"
+        ],
+        "summary": "registro de negocio",
+        "description": "registro de negocios",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "negocio registrado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseSuccess"
+            }
+          },
+          "400": {
+            "description": "datos imcompletos o incorrectos",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseErrors"
+            }
+          }
+        }
+      }
+    },
+    "/listar/idtrabajador": {
+      "post": {
+        "tags": [
+          "negocio"
+        ],
+        "summary": "buscar negocio",
+        "description": "retorna todos los negocios",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyRequestGet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "negocios encontrados",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyRequest"
+            }
+          },
+          "404": {
+            "description": "datos imcompletos o incorrectos",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseErrors"
+            }
+          }
+        }
+      }
+    },
+    "/listar/tipo": {
+      "post": {
+        "tags": [
+          "negocio"
+        ],
+        "summary": "buscar negocio",
+        "description": "retorna todos los negocios",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyRequestGet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "negocios encontrados",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyRequest"
+            }
+          },
+          "404": {
+            "description": "datos imcompletos o incorrectos",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseErrors"
+            }
+          }
+        }
+      }
+    },
+    "/eliminar": {
+      "delete": {
+        "tags": [
+          "negocio"
+        ],
+        "summary": "eliminar negocio",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyRequestDelete"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "negocio eliminada",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseSuccess"
+            }
+          },
+          "404": {
+            "description": "datos imcompletos o incorrectos",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseErrors"
+            }
+          }
+        }
+      }
+    },
+    "/editar": {
+      "put": {
+        "tags": [
+          "negocio"
+        ],
+        "summary": "negocio editado",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "negocio editado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseSuccess"
+            }
+          },
+          "400": {
+            "description": "datos imcompletos o incorrectos",
+            "schema": {
+              "$ref": "#/definitions/JsonApiBodyResponseErrors"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JsonApiBodyRequestGet": {
+      "type": "object",
+      "required": [
+        "negocio"
+      ],
+      "properties": {
+        "negocio": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GetRequest"
+          }
+        }
+      }
+    },
+    "JsonApiBodyRequestDelete": {
+      "type": "object",
+      "required": [
+        "negocio"
+      ],
+      "properties": {
+        "negocio": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeleteRequest"
+          }
+        }
+      }
+    },
+    "JsonApiBodyRequest": {
+      "type": "object",
+      "required": [
+        "negocio"
+      ],
+      "properties": {
+        "negocio": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrarRequest"
+          }
+        }
+      }
+    },
+    "GetRequest": {
+      "type": "object",
+      "required": [
+        "tipoConsulta",
+        "parametro",
+        "token"
+      ],
+      "properties": {
+        "tipoConsulta": {
+          "type": "string"
+        },
+        "parametro": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteRequest": {
+      "type": "object",
+      "required": [
+        "id",
+        "token"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "RegistrarRequest": {
+      "type": "object",
+      "required": [
+        "id",
+        "nombre",
+        "nit",
+        "foto",
+        "tipo",
+        "ubicacion",
+        "id_administrador",
+        "token"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "nit": {
+          "type": "string"
+        },
+        "foto": {
+          "type": "string"
+        },
+        "detalle": {
+          "type": "string"
+        },
+        "tipo": {
+          "type": "string"
+        },
+        "id_administrador": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonApiBodyResponseErrors": {
+      "type": "object",
+      "required": [
+        "codigo",
+        "detalle"
+      ],
+      "properties": {
+        "codigo": {
+          "type": "string"
+        },
+        "detalle": {
+          "type": "string"
+        }
+      }
+    },
+    "JsonApiBodyResponseSuccess": {
+      "type": "object",
+      "required": [
+        "id",
+        "nombre",
+        "estado"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "estado": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
