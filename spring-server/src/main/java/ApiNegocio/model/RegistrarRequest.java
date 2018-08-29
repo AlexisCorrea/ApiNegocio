@@ -27,6 +27,9 @@ public class RegistrarRequest   {
 
   @JsonProperty("nit")
   private String nit = null;
+ 
+  @JsonProperty("correo")
+  private String correo = null;
 
   @JsonProperty("foto")
   private String foto = null;
@@ -36,6 +39,10 @@ public class RegistrarRequest   {
 
   @JsonProperty("tipo")
   private String tipo = null;
+  
+
+  @JsonProperty("telefono")
+  private String telefono = null;
   
   @JsonProperty("ubicacion")
   private String ubicacion = null;
@@ -92,7 +99,20 @@ public class RegistrarRequest   {
     this.nit = nit;
     return this;
   }
+  
+  @DynamoDBAttribute
+  public String getCorreo() {
+    return correo;
+  }
 
+  public void setCorreo(String correo) {
+    this.correo = correo;
+  }
+
+  public RegistrarRequest correo(String correo) {
+    this.correo = correo;
+    return this;
+  }
   /**
    * Get nit
    * @return nit
@@ -175,6 +195,26 @@ public class RegistrarRequest   {
     this.idAdministrador = idAdministrador;
     return this;
   }
+  /**
+   * Get telefono
+   * @return telefono
+  **/
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @DynamoDBAttribute
+  public String getTelefono() {
+    return telefono;
+  }
+
+  public void setTelefono(String telefono) {
+    this.telefono = telefono;
+  }
+
+  public RegistrarRequest idTelefono(String telefono) {
+    this.telefono = telefono;
+    return this;
+  }
   
   /**
    * Get ubicacion
@@ -247,9 +287,11 @@ public class RegistrarRequest   {
     return Objects.equals(this.id, registrarRequest.id) &&
         Objects.equals(this.nombre, registrarRequest.nombre) &&
         Objects.equals(this.nit, registrarRequest.nit) &&
+        Objects.equals(this.correo, registrarRequest.correo) &&
         Objects.equals(this.foto, registrarRequest.foto) &&
         Objects.equals(this.detalle, registrarRequest.detalle) &&
         Objects.equals(this.tipo, registrarRequest.tipo) &&
+        Objects.equals(this.telefono, registrarRequest.telefono) &&
         Objects.equals(this.idAdministrador, registrarRequest.idAdministrador)
     &&
         Objects.equals(this.token, registrarRequest.token);
@@ -257,7 +299,7 @@ public class RegistrarRequest   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nombre, nit, foto, detalle, tipo, idAdministrador);
+    return Objects.hash(id, nombre, nit, correo,foto, detalle, tipo, idAdministrador);
     //, token);
   }
 
@@ -269,9 +311,11 @@ public class RegistrarRequest   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    nombre: ").append(toIndentedString(nombre)).append("\n");
     sb.append("    nit: ").append(toIndentedString(nit)).append("\n");
+    sb.append("    correo: ").append(toIndentedString(correo)).append("\n");
     sb.append("    foto: ").append(toIndentedString(foto)).append("\n");
     sb.append("    detalle: ").append(toIndentedString(detalle)).append("\n");
     sb.append("    tipo: ").append(toIndentedString(tipo)).append("\n");
+    sb.append("    telefono: ").append(toIndentedString(telefono)).append("\n");
     sb.append("    idAdministrador: ").append(toIndentedString(idAdministrador)).append("\n");
     sb.append("    token: ").append(toIndentedString(token)).append("\n");
     sb.append("}");
