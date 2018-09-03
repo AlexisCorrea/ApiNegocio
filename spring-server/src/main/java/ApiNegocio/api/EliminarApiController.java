@@ -76,10 +76,11 @@ public class EliminarApiController implements EliminarApi {
 						return new ResponseEntity<JsonApiBodyResponseSuccess>(exito, HttpStatus.OK);
 
 					}
-					error.setCodigo("004");
-					error.setDetalle("no se encontro el negocio a eliminar");
-					return new ResponseEntity<JsonApiBodyResponseErrors>(error, HttpStatus.BAD_REQUEST);
-				}
+					}
+				error.setCodigo("004");
+				error.setDetalle("no se encontro el negocio a eliminar");
+				return new ResponseEntity<JsonApiBodyResponseErrors>(error, HttpStatus.BAD_REQUEST);
+			
 			}
 			error.setCodigo("001");
 			error.setDetalle("no tiene permisos de crear negocios");

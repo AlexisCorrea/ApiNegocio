@@ -8,6 +8,7 @@ package ApiNegocio.api;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -28,7 +29,7 @@ import java.util.List;
 
 @Api(value = "listar", description = "the listar API")
 public interface ListarApi {
-
+	@CrossOrigin(origins = "http://localhost:4200") 
     @ApiOperation(value = "buscar negocio", nickname = "listarIdtrabajadorPost", notes = "retorna todos los negocios", response = JsonApiBodyRequest.class, tags={ "negocio", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "negocios encontrados", response = JsonApiBodyRequest.class),
@@ -39,7 +40,7 @@ public interface ListarApi {
         method = RequestMethod.POST)
     ResponseEntity<?> listarIdtrabajadorPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestGet body);
 
-
+	@CrossOrigin(origins = "http://localhost:4200") 
     @ApiOperation(value = "buscar negocio", nickname = "listarTipoPost", notes = "retorna todos los negocios", response = JsonApiBodyRequest.class, tags={ "negocio", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "negocios encontrados", response = JsonApiBodyRequest.class),

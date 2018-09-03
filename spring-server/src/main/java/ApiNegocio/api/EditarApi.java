@@ -8,6 +8,7 @@ package ApiNegocio.api;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -28,7 +29,7 @@ import java.util.List;
 
 @Api(value = "editar", description = "the editar API")
 public interface EditarApi {
-
+	@CrossOrigin(origins = "http://localhost:4200") 
     @ApiOperation(value = "negocio editado", nickname = "editarPut", notes = "", response = JsonApiBodyResponseSuccess.class, tags={ "negocio", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "negocio editado exitosamente", response = JsonApiBodyResponseSuccess.class),

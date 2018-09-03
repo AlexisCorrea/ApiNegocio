@@ -299,7 +299,7 @@ public class RegistrarRequest   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nombre, nit, correo,foto, detalle, tipo, idAdministrador);
+    return Objects.hash(id, nombre, nit, correo,foto, detalle, tipo, telefono,idAdministrador);
     //, token);
   }
 
