@@ -50,5 +50,17 @@ public interface ListarApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<?> listarTipoPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestGet body);
+	
+	@CrossOrigin(origins = "http://localhost:4200") 
+    @ApiOperation(value = "retorna id siguiente", nickname = "idsiguiente", notes = "retorna id necesario para relacionar con firebase", response = String.class, tags={ "negocio", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "negocios encontrados", response = String.class),
+        @ApiResponse(code = 404, message = "datos imcompletos o incorrectos", response = JsonApiBodyResponseErrors.class) })
+    @RequestMapping(value = "/obtenerIDsiguiente",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.GET)
+    ResponseEntity<?> obtenerIDsiguiente();
+
 
 }

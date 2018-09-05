@@ -10,6 +10,8 @@ import ApiNegocio.model.RegistrarRequest;
 import ApiNegocio.repository.negocioRepository;
 import ApiNegocio.services.ApiPersonas;
 import io.swagger.annotations.*;
+import ApiNegocio.util.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,8 @@ public class ListarApiController implements ListarApi {
 	private final ObjectMapper objectMapper;
 
 	private final HttpServletRequest request;
+	
+	CopiAndWrite copiaAnddWrite = new CopiAndWrite();
 
 	ApiPersonas api_personas = new ApiPersonas();
 
@@ -66,6 +70,13 @@ public class ListarApiController implements ListarApi {
 					error.setCodigo("006");
 					error.setDetalle("el parametro no puede ser vacio");
 					return new ResponseEntity<JsonApiBodyResponseErrors>(error, HttpStatus.BAD_REQUEST);
+				}
+				System.out.println(body.getNegocio().get(0).getID());
+				if (body.getNegocio().get(0).getID().equals("00")) {
+					List<RegistrarRequest> negocios = (List<RegistrarRequest>) negocio_repository.findAll();
+					JsonApiBodyRequest obj = new JsonApiBodyRequest();
+					obj.setNegocio(negocios);
+					return new ResponseEntity<JsonApiBodyRequest>(obj,HttpStatus.OK);
 				}
 				if (!api_personas.validar_id(body.getNegocio().get(0).getID(), body.getNegocio().get(0).getToken())) {
 					error.setCodigo("007");
@@ -140,6 +151,18 @@ public class ListarApiController implements ListarApi {
 		error.setCodigo("003");
 		error.setDetalle("error en el header");
 		return new ResponseEntity<JsonApiBodyResponseErrors>(error, HttpStatus.BAD_REQUEST);
+	}
+	
+
+	@Override
+	public ResponseEntity<?> obtenerIDsiguiente() {
+		String accept = request.getHeader("Accept");
+		if (accept != null && accept.contains("application/json")) {
+			return new ResponseEntity<String>(copiaAnddWrite.leer(),HttpStatus.OK);
+		}else {
+			return new ResponseEntity<JsonApiBodyResponseErrors>(error, HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 
 }
