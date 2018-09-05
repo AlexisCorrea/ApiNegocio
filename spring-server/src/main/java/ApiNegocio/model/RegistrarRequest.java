@@ -36,6 +36,12 @@ public class RegistrarRequest   {
 
   @JsonProperty("detalle")
   private String detalle = null;
+  
+  @JsonProperty("latitud")
+  private String latitud = null;
+  
+  @JsonProperty("longitud")
+  private String longitud = null;
 
   @JsonProperty("tipo")
   private String tipo = null;
@@ -86,6 +92,34 @@ public class RegistrarRequest   {
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
+  @DynamoDBAttribute
+  public String getLongitud() {
+    return longitud;
+  }
+
+  public void setLongitud(String longitud) {
+    this.longitud = longitud;
+  }
+
+  public RegistrarRequest longitud(String longitud) {
+    this.longitud = longitud;
+    return this;
+  }
+  
+  @DynamoDBAttribute
+  public String getLatitud() {
+    return latitud;
+  }
+
+  public void setLatitud(String latitud) {
+    this.latitud = latitud;
+  }
+
+  public RegistrarRequest latitud(String latitud) {
+    this.latitud = latitud;
+    return this;
+  }
+  
   @DynamoDBAttribute
   public String getNombre() {
     return nombre;
