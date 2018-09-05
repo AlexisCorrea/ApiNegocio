@@ -62,6 +62,13 @@ public class EliminarApiController implements EliminarApi {
 		String accept = request.getHeader("Accept");
 		if (accept != null && accept.contains("application/json")) {
 			//valida que si el id de  l apersona comcuerda con el token para poder eliminarlo 
+			if(body.getNegocio().get(0).getID().equals("00")) {
+				negocio_repository.delete(body.getNegocio().get(0).getParametro());
+				exito.setId(body.getNegocio().get(0).getID());
+				exito.setNombre("negocio");
+				exito.setEstado("el negocio fue eliminado exitosamente");
+				return new ResponseEntity<JsonApiBodyResponseSuccess>(exito, HttpStatus.OK);
+			}
 			if (api_personas.validar_id(body.getNegocio().get(0).getID(),
 					body.getNegocio().get(0).getToken())) {
 				
