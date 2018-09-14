@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import ApiNegocio.model.BodyFiltrado;
 import ApiNegocio.model.JsonApiBodyRequest;
 import ApiNegocio.model.JsonApiBodyRequestGet;
 import ApiNegocio.model.JsonApiBodyResponseErrors;
@@ -40,16 +41,27 @@ public interface ListarApi {
         method = RequestMethod.POST)
     ResponseEntity<?> listarIdtrabajadorPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestGet body);
 
+
 	@CrossOrigin(origins = "http://localhost:4200") 
     @ApiOperation(value = "buscar negocio", nickname = "listarTipoPost", notes = "retorna todos los negocios", response = JsonApiBodyRequest.class, tags={ "negocio", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "negocios encontrados", response = JsonApiBodyRequest.class),
         @ApiResponse(code = 404, message = "datos imcompletos o incorrectos", response = JsonApiBodyResponseErrors.class) })
-    @RequestMapping(value = "/listar/tipo",
+    @RequestMapping(value = "/listar/{tipo}",
         produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.POST)
-    ResponseEntity<?> listarTipoPost(@ApiParam(value = "body" ,required=true )  @Valid @RequestBody JsonApiBodyRequestGet body);
+        method = RequestMethod.GET)
+    ResponseEntity<?> listarTipoPost(@ApiParam(value = "", required = true) @PathVariable("tipo") String tipo);
+	
+	@CrossOrigin(origins = "http://localhost:4200") 
+    @ApiOperation(value = "buscar negocio", nickname = "listarTipoPost", notes = "retorna todos los negocios", response = JsonApiBodyRequest.class, tags={ "negocio", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "negocios encontrados", response = JsonApiBodyRequest.class),
+        @ApiResponse(code = 404, message = "datos imcompletos o incorrectos", response = JsonApiBodyResponseErrors.class) })
+    @RequestMapping(value = "/listar/id/{id}",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<?> listarporid(@ApiParam(value = "", required = true) @PathVariable("id") String id);
+	
 	
 	@CrossOrigin(origins = "http://localhost:4200") 
     @ApiOperation(value = "retorna id siguiente", nickname = "idsiguiente", notes = "retorna id necesario para relacionar con firebase", response = String.class, tags={ "negocio", })
@@ -58,9 +70,10 @@ public interface ListarApi {
         @ApiResponse(code = 404, message = "datos imcompletos o incorrectos", response = JsonApiBodyResponseErrors.class) })
     @RequestMapping(value = "/obtenerIDsiguiente",
         produces = { "application/json" }, 
-        consumes = { "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<?> obtenerIDsiguiente();
+
+
 
 
 }
